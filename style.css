@@ -1,0 +1,161 @@
+   :root {
+    --bg: #131217;
+    --case: #232128;
+    --case-edge: #2f2c35;
+    --display-bg: #0b0a0d;
+    --display-text: #ffffff;
+    --display-glow: rgba(255, 180, 84, 0.45);
+    --key-number: #322f38;
+    --key-number-text: #f1eee9;
+    --key-function: #48454f;
+    --key-function-text: #d8d4dd;
+    --key-operator: #e8792c;
+    --key-operator-text: #fff5ea;
+    --key-equal: #ff9d3d;
+    --key-equal-text: #1a1108;
+    --radius-case: 28px;
+    --radius-key: 16px;
+    font-size: 16px;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background:
+      radial-gradient(circle at 50% -10%, #2a2733 0%, transparent 55%),
+      var(--bg);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  
+  .Calculadora {
+    width: 100%;
+    max-width: 340px;
+    background: linear-gradient(160deg, var(--case-edge), var(--case) 40%);
+    border-radius: var(--radius-case);
+    padding: 22px;
+    box-shadow:
+      0 30px 60px -20px rgba(0, 0, 0, 0.65),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+      0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  }
+  
+  #display {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 18px;
+    padding: 22px 18px;
+    border: none;
+    border-radius: 14px;
+    background: var(--display-bg);
+    box-shadow:
+        inset 0 2px 6px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    color: var(--display-text);
+    text-shadow: 0 0 12px var(--display-glow);
+    font-family: "SFMono-Regular", ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    letter-spacing: 1px;
+    text-align: right;
+    -webkit-appearance: none;
+}
+  
+  .botões {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  button {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: clamp(52px, 14vw, 64px);
+    border-radius: var(--radius-key);
+    font-family: inherit;
+    font-size: clamp(1.05rem, 4vw, 1.25rem);
+    font-weight: 600;
+    background: var(--key-number);
+    color: var(--key-number-text);
+    box-shadow:
+      0 3px 0 rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+  }
+  
+  button:hover {
+    filter: brightness(1.1);
+  }
+  
+  button:active {
+    transform: translateY(2px);
+    box-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  
+  button:focus-visible {
+    outline: 2px solid var(--display-text);
+    outline-offset: 2px;
+  }
+  
+  /* Funções: C e ⌫ */
+  .botões button:nth-child(1),
+  .botões button:nth-child(2) {
+    background: var(--key-function);
+    color: var(--key-function-text);
+  }
+  
+  /* Operadores: ÷ × - + */
+  .botões button:nth-child(3),
+  .botões button:nth-child(4),
+  .botões button:nth-child(8),
+  .botões button:nth-child(12) {
+    background: var(--key-operator);
+    color: var(--key-operator-text);
+  }
+  
+  /* Igual */
+  .igual {
+    background: var(--key-equal) !important;
+    color: var(--key-equal-text) !important;
+    grid-row: span 2;
+  }
+  
+  /* Zero ocupa duas colunas */
+  .zero {
+    grid-column: span 2;
+  }
+  
+  /* ============ Responsivo ============ */
+  @media (max-width: 380px) {
+    .Calculadora {
+      padding: 16px;
+      border-radius: 20px;
+    }
+  
+    .botões {
+      gap: 8px;
+    }
+  }
+  
+  @media (min-width: 480px) {
+    .Calculadora {
+      max-width: 380px;
+      padding: 28px;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    button {
+      transition: none;
+    }
+  }
